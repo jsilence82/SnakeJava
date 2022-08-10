@@ -1,3 +1,5 @@
+package main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         timer.start();
 
         add(this.snake);
-        setTitle("The Snake");
+        setTitle("The main.Snake");
         setSize(400, 400);
         this.addKeyListener(this);
         setLocationRelativeTo(null);
