@@ -2,9 +2,9 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import static main.Main.updateScore;
 import static main.Rectangle.rec_height;
 import static main.Rectangle.rec_width;
 
@@ -62,14 +62,17 @@ public class Snake extends JPanel {
             if (rectangle3.intersects(rectangle2) || rectangle3.getPositionx() > this.window.getWidth()
                     || rectangle3.getPositionx() < 0 || rectangle3.getPositiony() > this.window.getHeight()
                     || rectangle3.getPositiony() < 0) {
-                System.out.println("Game Over");
                 this.window.setVisible(false);
-
-                JFrame parent = new JFrame("Game Over!");
-                JOptionPane.showMessageDialog(parent, "Your score: " + this.body.size());
-
-                this.window.dispatchEvent(new WindowEvent(this.window, WindowEvent.WINDOW_CLOSING));
-                System.exit(0);
+                int response = JOptionPane.showConfirmDialog(null, "Your score: " + Main.score +
+                        "\nNew Game?", "Game Over!",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    new Main();
+                } else if (response == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                } else if (response == JOptionPane.CLOSED_OPTION) {
+                   System.exit(0);
+                }
             }
         }
 
@@ -77,7 +80,7 @@ public class Snake extends JPanel {
             if (rectangle3.intersects(new Rectangle(this.food.getPositionx(), this.food.getPositiony()))) {
                 this.food = null;
                 this.addPart();
-
+                updateScore();
             }
         }
 
@@ -121,8 +124,8 @@ public class Snake extends JPanel {
 
         graphic.setPaint(Color.green);
         for (Rectangle rec : this.body) {
-            graphic.drawOval(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
-            graphic.fillOval(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
+            graphic.drawRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
+            graphic.fillRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
         }
     }
 
@@ -132,6 +135,10 @@ public class Snake extends JPanel {
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    public ArrayList<Rectangle> getBody() {
+        return body;
     }
 
     @Override

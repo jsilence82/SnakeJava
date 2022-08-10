@@ -5,8 +5,8 @@ public class Rectangle {
     private int positionx;
     private int positiony;
 
-    public static final int rec_width = 22;
-    public static final int rec_height = 22;
+    public static final int rec_width = 25;
+    public static final int rec_height = 25;
 
     public Rectangle(int positionx, int positiony){
         this.positionx = positionx;

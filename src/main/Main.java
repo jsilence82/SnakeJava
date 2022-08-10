@@ -9,27 +9,37 @@ import java.awt.event.KeyListener;
 
 public class Main extends JFrame implements KeyListener, ActionListener {
     Snake snake;
+    static JLabel scoreLabel;
+    static int score = 0;
 
     public Main(){
 
-        this.snake = new Snake(this);
+            this.snake = new Snake(this);
 
-        Timer timer = new Timer(150, this);
-        timer.start();
+            Timer timer = new Timer(150, this);
+            timer.start();
 
-        java.util.Timer drawFood = new java.util.Timer();
-        Food start = new Food(this.snake);
-        drawFood.schedule(start,0,2000);
+            java.util.Timer drawFood = new java.util.Timer();
+            Food start = new Food(this.snake);
+            drawFood.schedule(start, 0, 1000);
 
-        add(this.snake);
-        setTitle("The Snake");
-        setSize(525, 525);
-        this.addKeyListener(this);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            add(this.snake);
+            setTitle("The Snake");
+            setSize(525, 525);
+            this.addKeyListener(this);
+            setLocationRelativeTo(null);
+            setVisible(true);
+            setResizable(false);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+            scoreLabel = new JLabel("Score: 0");
+            scoreLabel.setFont(new Font("Arial", Font.BOLD,16));
+            getContentPane().add(scoreLabel, BorderLayout.NORTH);
+    }
+
+    public static void updateScore() {
+        score++;
+        scoreLabel.setText("Score: " + score);
     }
 
     @Override

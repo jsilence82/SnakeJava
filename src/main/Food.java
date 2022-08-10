@@ -24,6 +24,7 @@ public class Food extends TimerTask {
     public void setPositiony(int positiony) {
         this.positiony = positiony;
     }
+
     public Food(Snake snake){
         this.snake = snake;
     }
@@ -41,8 +42,4 @@ public class Food extends TimerTask {
         }
 
     }
-
-
-
-
 }
