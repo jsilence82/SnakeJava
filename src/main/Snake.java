@@ -5,14 +5,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static main.Main.updateScore;
-import static main.Rectangle.rec_height;
-import static main.Rectangle.rec_width;
+import static main.Character.rec_height;
+import static main.Character.rec_width;
 
 public class Snake extends JPanel {
     private static final Color color = new Color(255, 255, 255);
     private static final int start = 50;
     private static final int speed = 25;
-    private ArrayList<Rectangle> body;
+    private ArrayList<Character> body;
     private String direction;
     private Food food;
     private final Main window;
@@ -22,11 +22,11 @@ public class Snake extends JPanel {
         this.window = window;
 
         this.body = new ArrayList<>();
-        body.add(new Rectangle(start, start));
-        Rectangle last = this.body.get(0);
-        body.add(new Rectangle(last.getPositionx() - rec_width, last.getPositiony()));
-        Rectangle last_2 = this.body.get(1);
-        body.add(new Rectangle(last_2.getPositionx() - rec_width, last_2.getPositiony()));
+        body.add(new Character(start, start));
+        Character last = this.body.get(0);
+        body.add(new Character(last.getPositionx() - rec_width, last.getPositiony()));
+        Character last_2 = this.body.get(1);
+        body.add(new Character(last_2.getPositionx() - rec_width, last_2.getPositiony()));
 
         this.direction = "right";
     }
@@ -40,23 +40,23 @@ public class Snake extends JPanel {
     }
 
     public void addPart() {
-        Rectangle last = this.body.get(this.body.size() - 1);
+        Character last = this.body.get(this.body.size() - 1);
         switch (this.direction) {
-            case "right" -> this.body.add(new Rectangle(last.getPositionx() - rec_width, last.getPositiony()));
-            case "left" -> this.body.add(new Rectangle(last.getPositionx() + rec_width, last.getPositiony()));
-            case "up" -> this.body.add((new Rectangle(last.getPositionx(), last.getPositiony() + rec_width)));
-            case "down" -> this.body.add(new Rectangle(last.getPositionx(), last.getPositiony() - rec_width));
+            case "right" -> this.body.add(new Character(last.getPositionx() - rec_width, last.getPositiony()));
+            case "left" -> this.body.add(new Character(last.getPositionx() + rec_width, last.getPositiony()));
+            case "up" -> this.body.add((new Character(last.getPositionx(), last.getPositiony() + rec_width)));
+            case "down" -> this.body.add(new Character(last.getPositionx(), last.getPositiony() - rec_width));
         }
     }
 
     public void checkCollision() {
-        Rectangle rectangle3 = this.body.get(0);
+        Character character3 = this.body.get(0);
         for (int i = 1; i < this.body.size(); i++) {
-            Rectangle rectangle2 = this.body.get(i);
+            Character character2 = this.body.get(i);
 
-            if (rectangle3.intersects(rectangle2) || rectangle3.getPositionx() > this.window.getWidth()
-                    || rectangle3.getPositionx() < 0 || rectangle3.getPositiony() > this.window.getHeight()
-                    || rectangle3.getPositiony() < 0) {
+            if (character3.intersects(character2) || character3.getPositionx() > this.window.getWidth()
+                    || character3.getPositionx() < 0 || character3.getPositiony() > this.window.getHeight()
+                    || character3.getPositiony() < 0) {
                 this.window.setVisible(false);
                 int response = JOptionPane.showConfirmDialog(null, "Your score: " + Main.score +
                                 "\nNew Game?", "Game Over!",
@@ -72,7 +72,7 @@ public class Snake extends JPanel {
         }
 
         if (this.food != null) {
-            if (rectangle3.intersects(new Rectangle(this.food.getPositionx(), this.food.getPositiony()))) {
+            if (character3.intersects(new Character(this.food.getPositionx(), this.food.getPositiony()))) {
                 this.food = null;
                 this.addPart();
                 updateScore();
@@ -82,10 +82,10 @@ public class Snake extends JPanel {
 
     public void moveSnake() {
 
-        ArrayList<Rectangle> newList = new ArrayList<>();
+        ArrayList<Character> newList = new ArrayList<>();
 
-        Rectangle first = this.body.get(0);
-        Rectangle head = new Rectangle(first.getPositionx(), first.getPositiony());
+        Character first = this.body.get(0);
+        Character head = new Character(first.getPositionx(), first.getPositiony());
 
         switch (this.direction) {
             case "right" -> head.setPositionx(speed);
@@ -96,9 +96,9 @@ public class Snake extends JPanel {
         newList.add(head);
 
         for (int i = 1; i < this.body.size(); i++) {
-            Rectangle previous = this.body.get(i - 1);
-            Rectangle newRectangle = new Rectangle(previous.getPositionx(), previous.getPositiony());
-            newList.add(newRectangle);
+            Character previous = this.body.get(i - 1);
+            Character newCharacter = new Character(previous.getPositionx(), previous.getPositiony());
+            newList.add(newCharacter);
         }
 
         this.body = newList;
@@ -117,7 +117,7 @@ public class Snake extends JPanel {
         }
 
         graphic.setPaint(Color.green);
-        for (Rectangle rec : this.body) {
+        for (Character rec : this.body) {
             graphic.drawRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
             graphic.fillRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
         }

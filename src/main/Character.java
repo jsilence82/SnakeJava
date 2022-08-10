@@ -1,6 +1,6 @@
 package main;
 
-public class Rectangle {
+public class Character {
 
     private int positionx;
     private int positiony;
@@ -8,13 +8,13 @@ public class Rectangle {
     public static final int rec_width = 25;
     public static final int rec_height = 25;
 
-    public Rectangle(int positionx, int positiony) {
+    public Character(int positionx, int positiony) {
         this.positionx = positionx;
         this.positiony = positiony;
     }
 
-    public boolean intersects(Rectangle rectangle2) {
-        return this.positionx == rectangle2.getPositionx() && this.positiony == rectangle2.getPositiony();
+    public boolean intersects(Character character2) {
+        return this.positionx == character2.getPositionx() && this.positiony == character2.getPositiony();
     }
 
     public int getPositionx() {
