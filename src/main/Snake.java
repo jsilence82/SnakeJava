@@ -9,16 +9,11 @@ import static main.Rectangle.rec_height;
 import static main.Rectangle.rec_width;
 
 public class Snake extends JPanel {
-
     private static final Color color = new Color(255, 255, 255);
     private static final int start = 50;
-    private static int speed = 25;
-
+    private static final int speed = 25;
     private ArrayList<Rectangle> body;
-
     private String direction;
-
-
     private Food food;
     private final Main window;
 
@@ -64,14 +59,14 @@ public class Snake extends JPanel {
                     || rectangle3.getPositiony() < 0) {
                 this.window.setVisible(false);
                 int response = JOptionPane.showConfirmDialog(null, "Your score: " + Main.score +
-                        "\nNew Game?", "Game Over!",
+                                "\nNew Game?", "Game Over!",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
                     new Main();
                 } else if (response == JOptionPane.NO_OPTION) {
                     System.exit(0);
                 } else if (response == JOptionPane.CLOSED_OPTION) {
-                   System.exit(0);
+                    System.exit(0);
                 }
             }
         }
@@ -83,7 +78,6 @@ public class Snake extends JPanel {
                 updateScore();
             }
         }
-
     }
 
     public void moveSnake() {
@@ -137,15 +131,10 @@ public class Snake extends JPanel {
         this.food = food;
     }
 
-    public ArrayList<Rectangle> getBody() {
-        return body;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         setBackground(color);
         drawSnake(g);
     }
-
 }

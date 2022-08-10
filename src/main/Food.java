@@ -13,31 +13,23 @@ public class Food extends TimerTask {
         return positionx;
     }
 
-    public void setPositionx(int positionx) {
-        this.positionx = positionx;
-    }
-
     public int getPositiony() {
         return positiony;
     }
 
-    public void setPositiony(int positiony) {
-        this.positiony = positiony;
-    }
-
-    public Food(Snake snake){
+    public Food(Snake snake) {
         this.snake = snake;
     }
 
-    public Food(){
+    public Food() {
         this.positionx = 25 * new Random().nextInt(20);
         this.positiony = 25 * new Random().nextInt(20);
 
     }
 
     @Override
-    public void run(){
-        if (this.snake.getFood() == null){
+    public void run() {
+        if (this.snake.getFood() == null) {
             this.snake.setFood(new Food());
         }
 

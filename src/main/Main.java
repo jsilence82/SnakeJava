@@ -12,29 +12,29 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     static JLabel scoreLabel;
     static int score = 0;
 
-    public Main(){
+    public Main() {
 
-            this.snake = new Snake(this);
+        this.snake = new Snake(this);
 
-            Timer timer = new Timer(150, this);
-            timer.start();
+        Timer timer = new Timer(150, this);
+        timer.start();
 
-            java.util.Timer drawFood = new java.util.Timer();
-            Food start = new Food(this.snake);
-            drawFood.schedule(start, 0, 1000);
+        java.util.Timer drawFood = new java.util.Timer();
+        Food start = new Food(this.snake);
+        drawFood.schedule(start, 0, 1000);
 
-            add(this.snake);
-            setTitle("The Snake");
-            setSize(525, 525);
-            this.addKeyListener(this);
-            setLocationRelativeTo(null);
-            setVisible(true);
-            setResizable(false);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(this.snake);
+        setTitle("The Snake");
+        setSize(600, 600);
+        this.addKeyListener(this);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            scoreLabel = new JLabel("Score: 0");
-            scoreLabel.setFont(new Font("Arial", Font.BOLD,16));
-            getContentPane().add(scoreLabel, BorderLayout.NORTH);
+        scoreLabel = new JLabel("Score: 0");
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        getContentPane().add(scoreLabel, BorderLayout.NORTH);
     }
 
     public static void updateScore() {
@@ -57,11 +57,11 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
         int key = e.getKeyCode();
 
-        if(key == 39 && !this.snake.getDirection().equals("left")) {
+        if (key == 39 && !this.snake.getDirection().equals("left")) {
             this.snake.setDirection("right");
-        } else if(key == 37 && !this.snake.getDirection().equals("right")){
+        } else if (key == 37 && !this.snake.getDirection().equals("right")) {
             this.snake.setDirection("left");
-        } else if(key == 38 && !this.snake.getDirection().equals("down")){
+        } else if (key == 38 && !this.snake.getDirection().equals("down")) {
             this.snake.setDirection("up");
         } else if (key == 40 && !this.snake.getDirection().equals("up")) {
             this.snake.setDirection("down");
@@ -73,7 +73,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         EventQueue.invokeLater(Main::new);
     }
 }
