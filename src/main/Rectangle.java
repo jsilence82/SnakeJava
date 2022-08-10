@@ -5,8 +5,8 @@ public class Rectangle {
     private int positionx;
     private int positiony;
 
-    public static final int rec_width = 25;
-    public static final int rec_height = 25;
+    public static final int rec_width = 22;
+    public static final int rec_height = 22;
 
     public Rectangle(int positionx, int positiony){
         this.positionx = positionx;
@@ -14,22 +14,22 @@ public class Rectangle {
     }
 
     public boolean intersects(Rectangle rectangle2){
-        return this.positionx == rectangle2.getPositionx() && this.positiony == rectangle2.getPositiony()
+        return this.positionx == rectangle2.getPositionx() && this.positiony == rectangle2.getPositiony();
     }
 
     public int getPositionx() {
-        return positionx;
+        return this.positionx;
     }
 
-    public void setPositionx(int positionx) {
-        this.positionx = positionx;
+    public void setPositionx(int increment) {
+        this.positionx = this.positionx + increment;
     }
 
     public int getPositiony() {
-        return positiony;
+        return this.positiony;
     }
 
-    public void setPositiony(int positiony) {
-        this.positiony = positiony;
+    public void setPositiony(int increment) {
+        this.positiony = this.positiony + increment;
     }
 }
