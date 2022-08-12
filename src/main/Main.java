@@ -8,9 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Main extends JFrame implements KeyListener, ActionListener {
+
     Snake snake;
-    static JLabel scoreLabel;
-    static int score = 0;
+    JLabel scoreLabel;
+    private int score = 0;
 
     public Main() {
 
@@ -21,7 +22,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
         java.util.Timer drawFood = new java.util.Timer();
         Food start = new Food(this.snake);
-        drawFood.schedule(start, 0, 1000);
+        drawFood.schedule(start, 0, 100);
 
         add(this.snake);
         setTitle("The Snake");
@@ -35,9 +36,23 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         scoreLabel = new JLabel("Score: 0");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
         getContentPane().add(scoreLabel, BorderLayout.NORTH);
+
     }
 
-    public static void updateScore() {
+    public void endGame() {
+        int response = JOptionPane.showConfirmDialog(null, "Your score: " + score +
+                        "\nNew Game?", "Game Over!",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            EventQueue.invokeLater(Main::new);
+        } else if (response == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        } else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
+        }
+    }
+
+    public void updateScore() {
         score++;
         scoreLabel.setText("Score: " + score);
     }

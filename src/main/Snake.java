@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static main.Main.updateScore;
 import static main.Character.rec_height;
 import static main.Character.rec_width;
 
@@ -49,25 +48,14 @@ public class Snake extends JPanel {
         }
     }
 
-    public void checkCollision() {
+    public boolean checkCollision() {
         Character character3 = this.body.get(0);
         for (int i = 1; i < this.body.size(); i++) {
             Character character2 = this.body.get(i);
-
-            if (character3.intersects(character2) || character3.getPositionx() > this.window.getWidth()
-                    || character3.getPositionx() < 0 || character3.getPositiony() > this.window.getHeight()
-                    || character3.getPositiony() < 0) {
-                this.window.setVisible(false);
-                int response = JOptionPane.showConfirmDialog(null, "Your score: " + Main.score +
-                                "\nNew Game?", "Game Over!",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.YES_OPTION) {
-                    new Main();
-                } else if (response == JOptionPane.NO_OPTION) {
-                    System.exit(0);
-                } else if (response == JOptionPane.CLOSED_OPTION) {
-                    System.exit(0);
-                }
+            if (character3.intersects(character2) || character3.getPositionx() > this.window.getWidth() || character3.getPositionx() < 0
+                    || character3.getPositiony() > this.window.getHeight()
+                    || character3.getPositiony() < 0){
+                return true;
             }
         }
 
@@ -75,9 +63,11 @@ public class Snake extends JPanel {
             if (character3.intersects(new Character(this.food.getPositionx(), this.food.getPositiony()))) {
                 this.food = null;
                 this.addPart();
-                updateScore();
+                this.window.updateScore();
+                return false;
             }
         }
+        return false;
     }
 
     public void moveSnake() {
@@ -103,6 +93,10 @@ public class Snake extends JPanel {
 
         this.body = newList;
         checkCollision();
+        if (checkCollision()){
+            this.window.setVisible(false);
+            this.window.endGame();
+        }
     }
 
     public void drawSnake(Graphics g) {
