@@ -64,6 +64,7 @@ public class Snake extends JPanel {
                 this.food = null;
                 this.addPart();
                 this.window.updateScore();
+                this.window.updateTimer();
                 return false;
             }
         }

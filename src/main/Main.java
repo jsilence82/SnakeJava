@@ -12,12 +12,15 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     Snake snake;
     JLabel scoreLabel;
     private int score = 0;
+    int delay = 145;
+
+    private Timer timer;
 
     public Main() {
 
         this.snake = new Snake(this);
 
-        Timer timer = new Timer(150, this);
+        timer = new Timer(125, this);
         timer.start();
 
         java.util.Timer drawFood = new java.util.Timer();
@@ -50,6 +53,13 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         } else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
         }
+    }
+
+    public void updateTimer(){
+        --delay;
+        timer.stop();
+        timer.setDelay(delay);
+        timer.start();
     }
 
     public void updateScore() {
