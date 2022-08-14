@@ -1,12 +1,10 @@
 package main;
 
 public class Character {
-
-    private int positionx;
-    private int positiony;
-
     public static final int rec_width = 25;
     public static final int rec_height = 25;
+    private int positionx;
+    private int positiony;
 
     public Character(int positionx, int positiony) {
         this.positionx = positionx;

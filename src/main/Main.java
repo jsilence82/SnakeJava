@@ -11,10 +11,11 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
     Snake snake;
     JLabel scoreLabel;
-    private int score = 0;
+    JLabel lastScoreLabel;
+    JLabel timeLabel;
     int delay = 145;
-
-    private Timer timer;
+    private int totalScore = 0;
+    private final Timer timer;
 
     public Main() {
 
@@ -30,20 +31,35 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         add(this.snake);
         setTitle("The Snake");
         setSize(600, 600);
+
         this.addKeyListener(this);
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        scoreLabel = new JLabel("Score: 0");
+        scoreLabel = new JLabel("Total Score: 0000");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        getContentPane().add(scoreLabel, BorderLayout.NORTH);
+        scoreLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        timeLabel = new JLabel("Time: 00");
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        timeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        lastScoreLabel = new JLabel("Score: 0000");
+        lastScoreLabel.setFont((new Font("Arial", Font.BOLD, 16)));
+        lastScoreLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        JPanel scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 75, 10));
+        scorePanel.add(scoreLabel);
+        scorePanel.add(timeLabel);
+        scorePanel.add(lastScoreLabel);
+        add(BorderLayout.NORTH, scorePanel);
 
     }
 
     public void endGame() {
-        int response = JOptionPane.showConfirmDialog(null, "Your score: " + score +
+        int response = JOptionPane.showConfirmDialog(null, "Your score: " + totalScore +
                         "\nNew Game?", "Game Over!",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
@@ -62,9 +78,13 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         timer.start();
     }
 
-    public void updateScore() {
-        score++;
-        scoreLabel.setText("Score: " + score);
+    public void updateScore(long time) {
+        int score = (int) (10 * 100 / time);
+
+        totalScore = totalScore + score;
+        lastScoreLabel.setText("Score: " + score);
+        scoreLabel.setText("Total Score: " + totalScore);
+        timeLabel.setText("Time: " + time);
     }
 
     @Override
@@ -73,13 +93,10 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
-
         int key = e.getKeyCode();
 
         if (key == 39 && !this.snake.getDirection().equals("left")) {
@@ -94,9 +111,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) {}
 
     public static void main(String[] args) {
         EventQueue.invokeLater(Main::new);

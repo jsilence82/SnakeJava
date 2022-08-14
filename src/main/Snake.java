@@ -15,7 +15,7 @@ public class Snake extends JPanel {
     private String direction;
     private Food food;
     private final Main window;
-
+    private final Stopwatch scoreClock;
 
     public Snake(main.Main window) {
         this.window = window;
@@ -28,14 +28,9 @@ public class Snake extends JPanel {
         body.add(new Character(last_2.getPositionx() - rec_width, last_2.getPositiony()));
 
         this.direction = "right";
-    }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public String getDirection() {
-        return this.direction;
+        this.scoreClock = new Stopwatch();
+        this.scoreClock.start();
     }
 
     public void addPart() {
@@ -63,8 +58,10 @@ public class Snake extends JPanel {
             if (character3.intersects(new Character(this.food.getPositionx(), this.food.getPositiony()))) {
                 this.food = null;
                 this.addPart();
-                this.window.updateScore();
+                this.scoreClock.stop();
+                this.window.updateScore(this.scoreClock.getElapsedSeconds());
                 this.window.updateTimer();
+                this.scoreClock.start();
                 return false;
             }
         }
@@ -118,18 +115,26 @@ public class Snake extends JPanel {
         }
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        setBackground(color);
+        drawSnake(g);
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public String getDirection() {
+        return this.direction;
+    }
+
     public Food getFood() {
         return food;
     }
 
     public void setFood(Food food) {
         this.food = food;
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        setBackground(color);
-        drawSnake(g);
     }
 }
