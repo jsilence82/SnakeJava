@@ -13,15 +13,15 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     JLabel scoreLabel;
     JLabel lastScoreLabel;
     JLabel timeLabel;
-    int delay = 145;
-    private int totalScore = 0;
+    private int delay = 145;
+    private double totalScore = 0;
     private final Timer timer;
 
     public Main() {
 
         this.snake = new Snake(this);
 
-        timer = new Timer(125, this);
+        timer = new Timer(delay, this);
         timer.start();
 
         java.util.Timer drawFood = new java.util.Timer();
@@ -40,15 +40,15 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
         scoreLabel = new JLabel("Total Score: 0000");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        scoreLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        scoreLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 
         timeLabel = new JLabel("Time: 00");
         timeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        timeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        timeLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 
         lastScoreLabel = new JLabel("Score: 0000");
         lastScoreLabel.setFont((new Font("Arial", Font.BOLD, 16)));
-        lastScoreLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        lastScoreLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 
         JPanel scorePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 75, 10));
         scorePanel.add(scoreLabel);
@@ -73,18 +73,16 @@ public class Main extends JFrame implements KeyListener, ActionListener {
 
     public void updateTimer(){
         --delay;
-        timer.stop();
         timer.setDelay(delay);
         timer.start();
     }
 
-    public void updateScore(long time) {
-        int score = (int) (10 * 100 / time);
-
+    public void updateScore(double time) {
+        double score = (10 * 100 / Math.ceil(time));
         totalScore = totalScore + score;
         lastScoreLabel.setText("Score: " + score);
         scoreLabel.setText("Total Score: " + totalScore);
-        timeLabel.setText("Time: " + time);
+        timeLabel.setText("Time: " + Math.ceil(time));
     }
 
     @Override

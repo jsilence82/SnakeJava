@@ -33,6 +33,10 @@ public class Snake extends JPanel {
         this.scoreClock.start();
     }
 
+    /*
+    Adds a new Character block to the end of the Snake. Switch case determines which direction the Snake is currently
+    traveling, so it can determine where the last Character block is located and then adds a new Character to the end.
+     */
     public void addPart() {
         Character last = this.body.get(this.body.size() - 1);
         switch (this.direction) {
@@ -43,6 +47,13 @@ public class Snake extends JPanel {
         }
     }
 
+    /*
+    The checkCollision method is called after each move of the Snake object. It determines the length of the snake and
+    if the head collides with any part of the Snake. It also checks if the head exceeds the boundaries of the window.
+    It also checks if the Snake intersects with the Food object
+
+    A return of true ends the game. False allows the game to continue.
+     */
     public boolean checkCollision() {
         Character character3 = this.body.get(0);
         for (int i = 1; i < this.body.size(); i++) {
@@ -75,6 +86,8 @@ public class Snake extends JPanel {
         Character first = this.body.get(0);
         Character head = new Character(first.getPositionx(), first.getPositiony());
 
+        // Received from the keyPressed Listener from the Main class. Changes the direction of the head, depending on
+        // key pressed.
         switch (this.direction) {
             case "right" -> head.setPositionx(speed);
             case "left" -> head.setPositionx(-speed);
@@ -97,6 +110,7 @@ public class Snake extends JPanel {
         }
     }
 
+    // Draws the Snake and the Food using Graphics2D class.
     public void drawSnake(Graphics g) {
         moveSnake();
 

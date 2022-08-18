@@ -1,5 +1,10 @@
 package main;
 
+
+/* The Stopwatch class controls the timer which dictates the score. The method nanoTime() is called when a new Food
+is created and serves as the start time. It is called again when collision between Snake and Food is detected and
+serves as a stop time.
+ */
 public class Stopwatch {
 
     private long startTime = 0;
@@ -16,15 +21,15 @@ public class Stopwatch {
         this.watchRunning = true;
     }
 
-    public long getElapsedSeconds() {
-        long elapsedTime;
+    public double getElapsedSeconds() {
+        double elapsedTime;
         if (watchRunning){
             elapsedTime = (System.nanoTime() - startTime);
         }
         else {
             elapsedTime = (stopTime - startTime);
         }
-        long nanSecondsPerSecond = 1000000000;
+        double nanSecondsPerSecond = 1000000000;
         return elapsedTime / nanSecondsPerSecond;
     }
 }
