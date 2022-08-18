@@ -59,7 +59,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     }
 
     public void endGame() {
-        int response = JOptionPane.showConfirmDialog(null, "Your score: " + totalScore +
+        int response = JOptionPane.showConfirmDialog(null, "Your score: " + Math.round(totalScore) +
                         "\nNew Game?", "Game Over!",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
@@ -80,8 +80,8 @@ public class Main extends JFrame implements KeyListener, ActionListener {
     public void updateScore(double time) {
         double score = (10 * 100 / Math.ceil(time));
         totalScore = totalScore + score;
-        lastScoreLabel.setText("Score: " + score);
-        scoreLabel.setText("Total Score: " + totalScore);
+        lastScoreLabel.setText("Score: " + Math.round(score));
+        scoreLabel.setText("Total Score: " + Math.round(totalScore));
         timeLabel.setText("Time: " + Math.ceil(time));
     }
 
