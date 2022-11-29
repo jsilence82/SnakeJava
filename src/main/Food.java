@@ -4,7 +4,7 @@ package main;
 Class for the Food object. It inherits from the TimerTask class, so it can check every second if the Food object is
 null. If null, a new Food object is created.
 
-Variables positionx and positiony determines the object's placement in the game field.
+Variables positionX and positionY determines the object's placement in the game field.
  */
 
 import java.util.Random;
@@ -12,8 +12,8 @@ import java.util.TimerTask;
 
 public class Food extends TimerTask {
 
-    private int positionx;
-    private int positiony;
+    private int positionX;
+    private int positionY;
     private Snake snake;
 
     public Food(Snake snake) {
@@ -21,16 +21,16 @@ public class Food extends TimerTask {
     }
 
     public Food() {
-        this.positionx = 25 * new Random().nextInt(20);
-        this.positiony = 25 * new Random().nextInt(20);
+        this.positionX = 25 * new Random().nextInt(20);
+        this.positionY = 25 * new Random().nextInt(20);
     }
 
-    public int getPositionx() {
-        return positionx;
+    public int getPositionX() {
+        return positionX;
     }
 
-    public int getPositiony() {
-        return positiony;
+    public int getPositionY() {
+        return positionY;
     }
 
     @Override

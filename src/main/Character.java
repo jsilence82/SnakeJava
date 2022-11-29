@@ -3,31 +3,31 @@ package main;
 public class Character {
     public static final int rec_width = 25;
     public static final int rec_height = 25;
-    private int positionx;
-    private int positiony;
+    private int positionX;
+    private int positionY;
 
-    public Character(int positionx, int positiony) {
-        this.positionx = positionx;
-        this.positiony = positiony;
+    public Character(int positionX, int positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
     public boolean intersects(Character character2) {
-        return this.positionx == character2.getPositionx() && this.positiony == character2.getPositiony();
+        return this.positionX == character2.getPositionX() && this.positionY == character2.getPositionY();
     }
 
-    public int getPositionx() {
-        return this.positionx;
+    public int getPositionX() {
+        return this.positionX;
     }
 
-    public void setPositionx(int increment) {
-        this.positionx = this.positionx + increment;
+    public void setPositionX(int increment) {
+        this.positionX = this.positionX + increment;
     }
 
-    public int getPositiony() {
-        return this.positiony;
+    public int getPositionY() {
+        return this.positionY;
     }
 
-    public void setPositiony(int increment) {
-        this.positiony = this.positiony + increment;
+    public void setPositionY(int increment) {
+        this.positionY = this.positionY + increment;
     }
 }

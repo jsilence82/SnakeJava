@@ -23,9 +23,9 @@ public class Snake extends JPanel {
         this.body = new ArrayList<>();
         body.add(new Character(start, start));
         Character last = this.body.get(0);
-        body.add(new Character(last.getPositionx() - rec_width, last.getPositiony()));
+        body.add(new Character(last.getPositionX() - rec_width, last.getPositionY()));
         Character last_2 = this.body.get(1);
-        body.add(new Character(last_2.getPositionx() - rec_width, last_2.getPositiony()));
+        body.add(new Character(last_2.getPositionX() - rec_width, last_2.getPositionY()));
 
         this.direction = "right";
 
@@ -40,10 +40,10 @@ public class Snake extends JPanel {
     public void addPart() {
         Character last = this.body.get(this.body.size() - 1);
         switch (this.direction) {
-            case "right" -> this.body.add(new Character(last.getPositionx() - rec_width, last.getPositiony()));
-            case "left" -> this.body.add(new Character(last.getPositionx() + rec_width, last.getPositiony()));
-            case "up" -> this.body.add((new Character(last.getPositionx(), last.getPositiony() + rec_width)));
-            case "down" -> this.body.add(new Character(last.getPositionx(), last.getPositiony() - rec_width));
+            case "right" -> this.body.add(new Character(last.getPositionX() - rec_width, last.getPositionY()));
+            case "left" -> this.body.add(new Character(last.getPositionX() + rec_width, last.getPositionY()));
+            case "up" -> this.body.add((new Character(last.getPositionX(), last.getPositionY() + rec_width)));
+            case "down" -> this.body.add(new Character(last.getPositionX(), last.getPositionY() - rec_width));
         }
     }
 
@@ -58,15 +58,15 @@ public class Snake extends JPanel {
         Character character3 = this.body.get(0);
         for (int i = 1; i < this.body.size(); i++) {
             Character character2 = this.body.get(i);
-            if (character3.intersects(character2) || character3.getPositionx() > this.window.getWidth() || character3.getPositionx() < 0
-                    || character3.getPositiony() > this.window.getHeight()
-                    || character3.getPositiony() < 0){
+            if (character3.intersects(character2) || character3.getPositionX() > this.window.getWidth() || character3.getPositionX() < 0
+                    || character3.getPositionY() > this.window.getHeight()
+                    || character3.getPositionY() < 0){
                 return true;
             }
         }
 
         if (this.food != null) {
-            if (character3.intersects(new Character(this.food.getPositionx(), this.food.getPositiony()))) {
+            if (character3.intersects(new Character(this.food.getPositionX(), this.food.getPositionY()))) {
                 this.food = null;
                 this.addPart();
                 this.scoreClock.stop();
@@ -84,21 +84,21 @@ public class Snake extends JPanel {
         ArrayList<Character> newList = new ArrayList<>();
 
         Character first = this.body.get(0);
-        Character head = new Character(first.getPositionx(), first.getPositiony());
+        Character head = new Character(first.getPositionX(), first.getPositionY());
 
         // Received from the keyPressed Listener from the Main class. Changes the direction of the head, depending on
         // key pressed.
         switch (this.direction) {
-            case "right" -> head.setPositionx(speed);
-            case "left" -> head.setPositionx(-speed);
-            case "up" -> head.setPositiony(-speed);
-            case "down" -> head.setPositiony(speed);
+            case "right" -> head.setPositionX(speed);
+            case "left" -> head.setPositionX(-speed);
+            case "up" -> head.setPositionY(-speed);
+            case "down" -> head.setPositionY(speed);
         }
         newList.add(head);
 
         for (int i = 1; i < this.body.size(); i++) {
             Character previous = this.body.get(i - 1);
-            Character newCharacter = new Character(previous.getPositionx(), previous.getPositiony());
+            Character newCharacter = new Character(previous.getPositionX(), previous.getPositionY());
             newList.add(newCharacter);
         }
 
@@ -118,14 +118,14 @@ public class Snake extends JPanel {
 
         if (this.food != null) {
             graphic.setPaint(Color.red);
-            graphic.drawOval(this.food.getPositionx(), this.food.getPositiony(), rec_width, rec_height);
-            graphic.fillOval(this.food.getPositionx(), this.food.getPositiony(), rec_width, rec_height);
+            graphic.drawOval(this.food.getPositionX(), this.food.getPositionY(), rec_width, rec_height);
+            graphic.fillOval(this.food.getPositionX(), this.food.getPositionY(), rec_width, rec_height);
         }
 
         graphic.setPaint(Color.green);
         for (Character rec : this.body) {
-            graphic.drawRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
-            graphic.fillRect(rec.getPositionx(), rec.getPositiony(), rec_width, rec_height);
+            graphic.drawRect(rec.getPositionX(), rec.getPositionY(), rec_width, rec_height);
+            graphic.fillRect(rec.getPositionX(), rec.getPositionY(), rec_width, rec_height);
         }
     }
 

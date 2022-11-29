@@ -9,10 +9,10 @@ import java.awt.event.KeyListener;
 
 public class Main extends JFrame implements KeyListener, ActionListener {
 
-    Snake snake;
-    JLabel scoreLabel;
-    JLabel lastScoreLabel;
-    JLabel timeLabel;
+    private final Snake snake;
+    private final JLabel scoreLabel;
+    private final JLabel lastScoreLabel;
+    private final JLabel timeLabel;
     private int delay = 145;
     private double totalScore = 0;
     private final Timer timer;
@@ -29,7 +29,7 @@ public class Main extends JFrame implements KeyListener, ActionListener {
         drawFood.schedule(start, 0, 100);
 
         add(this.snake);
-        setTitle("The Snake");
+        setTitle("Snake Game");
         setSize(600, 600);
 
         this.addKeyListener(this);
